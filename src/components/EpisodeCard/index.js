@@ -54,11 +54,11 @@ const EpisodeCard = () => {
         {episode.title} - {episode.interviewed}
       </Box>
       <Box display="flex" mt="2" alignItems="center" gap={5}>
-        <Link to={episode.youtube}>
-          <Icon as={BsYoutube} />
+        <Link target="_blank" to={episode.youtube}>
+          <Icon color="#c4302b" as={BsYoutube} />
         </Link>
-        <Link to={episode.spotify}>
-          <Icon as={BsSpotify} />
+        <Link target="_blank" to={episode.spotify}>
+          <Icon color="#1db954" as={BsSpotify} />
         </Link>
       </Box>
     </Box>
