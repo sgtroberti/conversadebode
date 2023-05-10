@@ -2,16 +2,9 @@ import { Flex } from "@chakra-ui/react";
 import HomeCard from "../components/HomeCard";
 import LastEpisode from "../components/LastEpisode";
 import EpisodeList from "../components/EpisodeList";
+import episodes from "../mock/episodes";
 
 function Home() {
-  const lastEp = {
-    title: "#021 - O Rito Schröder",
-    interviewed: "Ir.'. Mauro Leray",
-    youtube: "/vaiproyoutube",
-    spotify: "/vaiprospotify",
-    image: "./assets/021.png",
-  };
-
   return (
     <>
       <Flex
@@ -27,8 +20,8 @@ function Home() {
         alignItems={"center"}
       >
         <HomeCard />
-        <LastEpisode lastEp={lastEp} />
-        <EpisodeList />
+        <LastEpisode lastEp={episodes.at(-1)} />
+        <EpisodeList episodes={episodes} />
       </Flex>
     </>
   );

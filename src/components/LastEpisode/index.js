@@ -20,7 +20,10 @@ const LastEpisode = ({ lastEp }) => {
         alignItems={"center"}
         gap={5}
       >
-        <Image src={lastEp.image} w={["100%", "100%", "100%", "45%", "55%"]} />
+        <Image
+          src={lastEp.image || "./assets/yt.png"}
+          w={["100%", "100%", "100%", "45%", "55%"]}
+        />
         <Flex
           flexDir={["column"]}
           alignItems={"center"}

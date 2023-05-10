@@ -1,7 +1,7 @@
 import { Flex, Text } from "@chakra-ui/react";
 import EpisodeCard from "../EpisodeCard";
 
-const EpisodeList = () => {
+const EpisodeList = ({ episodes }) => {
   return (
     <Flex
       flexDir={"column"}
@@ -18,13 +18,9 @@ const EpisodeList = () => {
         Lista de Episódios
       </Text>
       <Flex p={5} justifyContent={"space-between"} gap={5} wrap={"wrap"}>
-        <EpisodeCard />
-        <EpisodeCard />
-        <EpisodeCard />
-        <EpisodeCard />
-        <EpisodeCard />
-        <EpisodeCard />
-        <EpisodeCard />
+        {episodes.map((episode) => (
+          <EpisodeCard key={episode.id} episode={episode} />
+        ))}
       </Flex>
     </Flex>
   );

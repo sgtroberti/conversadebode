@@ -2,17 +2,7 @@ import { Badge, Box, Icon, Image } from "@chakra-ui/react";
 import { BsSpotify, BsYoutube } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-const episode = {
-  image: "./assets/021.png",
-  tipe: "Entrevista",
-  date: "01/01/2023",
-  title: "#20 - Canal Papo Maçom",
-  youtube: "/youtube",
-  spotify: "/spotify",
-  interviewed: "Ir.'. Leandro Dotti",
-};
-
-const EpisodeCard = () => {
+const EpisodeCard = ({ episode }) => {
   return (
     <Box
       bgColor={"white"}
@@ -26,7 +16,12 @@ const EpisodeCard = () => {
       flexDir={"column"}
       alignItems={"center"}
     >
-      <Image src={episode.image} maxW={"100%"} alt={"capa"} />
+      <Image
+        src={episode.image || "./assets/yt.png"}
+        maxW={"100%"}
+        maxH={"150px"}
+        alt={"capa"}
+      />
       <Box p="6">
         <Box display="flex" alignItems="baseline">
           <Badge borderRadius="full" px="2" colorScheme="teal">
