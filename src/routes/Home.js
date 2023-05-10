@@ -9,7 +9,7 @@ function Home() {
     interviewed: "Ir.'. Mauro Leray",
     youtube: "/vaiproyoutube",
     spotify: "/vaiprospotify",
-    image: "./assets/yt.png",
+    image: "./assets/021.png",
   };
 
   return (
