@@ -37,13 +37,19 @@ const Suggestion = () => {
         mx={"auto"}
         borderRadius={8}
         bgColor={"rgba(255, 255, 255, 0.7)"}
-        maxW={["80%", "65%", "50%"]}
+        maxW={["96%", "90%", "85%", "70%"]}
         flexDir={"column"}
-        gap={[5]}
         justifyContent={"center"}
         alignItems={"center"}
       >
-        <Flex flexDir={"column"} gap={4} w={["100%", "90%", "70%"]}>
+        <Flex
+          flexDir={"column"}
+          gap={3}
+          w={["100%", "90%", "70%"]}
+          bgColor={"rgba(255,255,255,0.6)"}
+          borderRadius={8}
+          p={5}
+        >
           <Text
             fontWeight={700}
             fontSize={["1rem", "1.2rem", "1.8rem"]}
@@ -66,7 +72,8 @@ const Suggestion = () => {
           m={5}
           p={8}
           borderRadius={8}
-          bgColor={"rgba(255, 255, 255, 0.5)"}
+          w={["100%", "90%", "70%"]}
+          bgColor={"rgba(255,255,255,0.6)"}
         >
           <form onSubmit={handleSubmit(onSubmit)}>
             <Flex flexDir={"column"} w="100%" gap={8}>

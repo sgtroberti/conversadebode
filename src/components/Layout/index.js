@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import FadeTransition from "./FadeTransition";
 import { TransitionGroup } from "react-transition-group";
 import Footer from "../Footer";
+import Recomendation from "../../routes/Recomendation";
+import { Flex } from "@chakra-ui/react";
 
 const Layout = () => {
   const location = useLocation();
@@ -17,7 +19,12 @@ const Layout = () => {
   }, [location]);
 
   return (
-    <>
+    <Flex
+      flexDir={"column"}
+      gap={5}
+      minH={"100vh"}
+      justifyContent={"space-between"}
+    >
       <Navbar />
       <div className="transition-container">
         <TransitionGroup>
@@ -44,11 +51,22 @@ const Layout = () => {
                 </FadeTransition>
               }
             />
+            <Route
+              path="/boderecomenda"
+              element={
+                <FadeTransition
+                  location={location}
+                  previousLocation={previousLocation}
+                >
+                  <Recomendation />
+                </FadeTransition>
+              }
+            />
           </Routes>
         </TransitionGroup>
       </div>
       <Footer />
-    </>
+    </Flex>
   );
 };
 

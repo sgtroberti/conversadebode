@@ -8,6 +8,8 @@ const episodes = [
     youtube: "https://youtube.com/live/hKqHDRAxKMU",
     spotify: "https://open.spotify.com/episode/2d76xEVSJRSvp4yyYrdrLr",
     interviewed: "Ir.'. Renato Gabriel",
+    description:
+      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus sapiente exercitationem doloremque saepe voluptas dignissimos harum hic mollitia! Fuga amet nobis ut, explicabo accusantium provident omnis blanditiis accusamus earum perspiciatis!",
   },
   {
     id: 20,
@@ -18,6 +20,8 @@ const episodes = [
     youtube: "https://youtube.com/live/h5iJ6rOcTwg",
     spotify: "https://open.spotify.com/episode/42F2i2RdSySmfE4XHT5hAE",
     interviewed: "Ir.'. Leandro Dotti",
+    description:
+      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus sapiente exercitationem doloremque saepe voluptas dignissimos harum hic mollitia! Fuga amet nobis ut, explicabo accusantium provident omnis blanditiis accusamus earum perspiciatis!",
   },
   {
     id: 21,
@@ -28,6 +32,8 @@ const episodes = [
     youtube: "https://youtube.com/live/6SftXhl4yfU",
     spotify: "https://open.spotify.com/episode/3EWCwK0gfuS5nQonhniB9J",
     interviewed: "Ir.'. Mauro Leray",
+    description:
+      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus sapiente exercitationem doloremque saepe voluptas dignissimos harum hic mollitia! Fuga amet nobis ut, explicabo accusantium provident omnis blanditiis accusamus earum perspiciatis!",
   },
 ];
 

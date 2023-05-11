@@ -16,12 +16,15 @@ const EpisodeCard = ({ episode }) => {
       flexDir={"column"}
       alignItems={"center"}
     >
-      <Image
-        src={episode.image || "./assets/yt.png"}
-        maxW={"100%"}
-        maxH={"150px"}
-        alt={"capa"}
-      />
+      <Link target="_blank" to={episode.youtube}>
+        <Image
+          src={episode.image || "./assets/yt.png"}
+          maxW={"100%"}
+          maxH={"150px"}
+          alt={"capa"}
+          borderRadius={8}
+        />
+      </Link>
       <Box p="6">
         <Box display="flex" alignItems="baseline">
           <Badge borderRadius="full" px="2" colorScheme="teal">
@@ -50,10 +53,16 @@ const EpisodeCard = ({ episode }) => {
       </Box>
       <Box display="flex" mt="2" alignItems="center" gap={5}>
         <Link target="_blank" to={episode.youtube}>
-          <Icon color="#c4302b" as={BsYoutube} />
+          <Icon
+            w={10}
+            h={10}
+            color="#c4302b"
+            bgColor={"white"}
+            as={BsYoutube}
+          />
         </Link>
         <Link target="_blank" to={episode.spotify}>
-          <Icon color="#1db954" as={BsSpotify} />
+          <Icon w={10} h={10} color="#1db954" as={BsSpotify} />
         </Link>
       </Box>
     </Box>

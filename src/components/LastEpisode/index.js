@@ -7,23 +7,27 @@ const LastEpisode = ({ lastEp }) => {
     <Flex
       flexDir={"column"}
       w="100%"
-      borderTop={"2px solid #ccc"}
       alignItems={"center"}
       gap={5}
+      p={5}
+      bgColor={"rgba(255,255,255,0.6)"}
+      borderRadius={8}
     >
       <Text fontWeight={700} fontSize={["1.2rem", "1.5rem", "2rem"]}>
         Último Episódio
       </Text>
       <Flex
         flexDir={["column", "column", "column", "row"]}
-        justifyContent={"space-around"}
+        justifyContent={"center"}
         alignItems={"center"}
         gap={5}
       >
         <Image
           src={lastEp.image || "./assets/yt.png"}
           w={["100%", "100%", "100%", "45%", "55%"]}
+          borderRadius={8}
         />
+
         <Flex
           flexDir={["column"]}
           alignItems={"center"}
@@ -35,6 +39,7 @@ const LastEpisode = ({ lastEp }) => {
           <Text fontWeight={700} fontSize={["1.1rem", "1.3rem", "1.5rem"]}>
             {lastEp.title} - {lastEp.interviewed}
           </Text>
+          <Text noOfLines={3}>{lastEp.description}</Text>
           <Flex gap={[10, 20]}>
             <Flex>
               <Link target="_blank" to={lastEp.youtube}>
@@ -51,7 +56,7 @@ const LastEpisode = ({ lastEp }) => {
                 <Flex alignItems={"center"} flexDir={"column"} gap={2}>
                   <Icon w={20} h={20} color="#1db954" as={BsSpotify} />
                   <Text textAlign={"center"} fontWeight={500}>
-                    Assistir no Spotify
+                    Ouvir no Spotify
                   </Text>
                 </Flex>
               </Link>

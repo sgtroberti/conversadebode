@@ -6,9 +6,11 @@ const EpisodeList = ({ episodes }) => {
     <Flex
       flexDir={"column"}
       w="100%"
-      borderTop={"2px solid #ccc"}
       justifyContent={"center"}
       gap={5}
+      p={5}
+      bgColor={"rgba(255,255,255,0.6)"}
+      borderRadius={8}
     >
       <Text
         textAlign={"center"}

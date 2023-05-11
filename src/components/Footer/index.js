@@ -3,13 +3,11 @@ import { Flex, Text } from "@chakra-ui/react";
 const Footer = () => {
   return (
     <Flex
-      bgColor={"blue.100"}
-      p={5}
+      bgColor={"rgba(255, 255, 255, 0.8)"}
+      p={4}
       gap={10}
       justifyContent={"center"}
       alignItems={"center"}
-      position={"absolute"}
-      bottom={["-110px", "-80px"]}
       left={0}
       w={"100%"}
     >

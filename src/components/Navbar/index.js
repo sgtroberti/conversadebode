@@ -15,14 +15,10 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <Flex
-      p={5}
+      p={3}
       bgColor={"rgba(255, 255, 255, 0.7)"}
       alignItems="center"
-      gap="15px"
-      maxW={"80%"}
-      margin={"auto"}
-      mt={[3, 5]}
-      borderRadius={8}
+      minW={"100%"}
       justifyContent={"space-between"}
     >
       <Flex gap={5}>
@@ -35,12 +31,15 @@ const Navbar = () => {
           Conversa de Bode
         </Text>
       </Flex>
-      <Flex gap={10} display={["none", "none", "none", "flex"]}>
+      <Flex gap={5} display={["none", "none", "none", "flex"]}>
         <Link to={"/"}>
           <Button colorScheme="facebook">Home</Button>
         </Link>
         <Link to={"/sugestao"}>
           <Button colorScheme="facebook">Sugestão de pauta</Button>
+        </Link>
+        <Link to={"/boderecomenda"}>
+          <Button colorScheme="facebook">Bode recomenda</Button>
         </Link>
       </Flex>
       <Flex gap={10} display={["flex", "flex", "flex", "none"]}>
@@ -58,6 +57,9 @@ const Navbar = () => {
             </Link>
             <Link to={"/sugestao"}>
               <MenuItem>Sugestão de pauta</MenuItem>
+            </Link>
+            <Link to={"/boderecomenda"}>
+              <MenuItem>Bode recomenda</MenuItem>
             </Link>
           </MenuList>
         </Menu>

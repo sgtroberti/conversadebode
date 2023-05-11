@@ -13,9 +13,9 @@ function Home() {
         mx={"auto"}
         borderRadius={8}
         bgColor={"rgba(255, 255, 255, 0.7)"}
-        maxW={["80%", "75%", "60%"]}
+        w={["96%", "90%", "85%", "70%"]}
         flexDir={"column"}
-        gap={[5, 8, 10]}
+        gap={[3]}
         justifyContent={"center"}
         alignItems={"center"}
       >

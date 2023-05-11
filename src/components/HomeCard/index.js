@@ -5,7 +5,15 @@ import { BsInstagram, BsYoutube, BsSpotify } from "react-icons/bs";
 const HomeCard = () => {
   return (
     <>
-      <Flex justifyContent={"space-between"} alignItems={"center"} gap={5}>
+      <Flex
+        justifyContent={["space-between"]}
+        alignItems={["center"]}
+        gap={5}
+        p={5}
+        bgColor={"rgba(255,255,255,0.6)"}
+        borderRadius={8}
+        flexDir={["column", "row"]}
+      >
         <Image src="./assets/yt.png" maxH={["70px", "80px", "130px"]} />
         <Flex flexDir={"column"} gap={3}>
           <Text fontWeight={700} fontSize={["1rem", "1.5rem", "2rem"]}>
@@ -16,7 +24,7 @@ const HomeCard = () => {
             cultura maçônica a irmãos maçons e não-membros. A melhor arma contra
             o preconceito é o conhecimento!
           </Text>
-          <Flex gap={10}>
+          <Flex gap={10} justifyContent={["center", "flex-start"]}>
             <Link
               target="_blank"
               to={"https://www.instagram.com/conversadebode/"}
