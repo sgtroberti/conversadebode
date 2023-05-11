@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useToast } from "@chakra-ui/react";
+import client from "../services/client";
 
 const Suggestion = () => {
   const toast = useToast();
@@ -18,16 +19,34 @@ const Suggestion = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    try {
+      if (
+        await client.post("/suggestions", {
+          ...data,
+        })
+      ) {
+        toast({
+          title: "Sugestão enviada!",
+          description:
+            "Obrigado por enviar sua sugestão, agora vamos analisar e entrar em contato com a pessoa, se tudo der certo em breve o entrevistaremos!",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Opa, deu algum erro!",
+        description:
+          "Algo deu errado, por favor entre em contato com o email que está no fim da página!",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+
     console.log(data);
-    toast({
-      title: "Sugestão enviada!",
-      description:
-        "Obrigado por enviar sua sugestão, agora vamos analisar e entrar em contato com a pessoa, se tudo der certo em breve o entrevistaremos!",
-      status: "success",
-      duration: 5000,
-      isClosable: true,
-    });
   };
   return (
     <>
@@ -118,7 +137,7 @@ const Suggestion = () => {
                   type="text"
                   bgColor={"white"}
                   border="#ccc solid 1px"
-                  {...register("identification")}
+                  {...register("whoSend")}
                 />
               </FormControl>
               <Button type="submit" colorScheme="facebook" variant={"solid"}>

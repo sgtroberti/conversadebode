@@ -39,7 +39,7 @@ const LastEpisode = ({ lastEp }) => {
           <Text fontWeight={700} fontSize={["1.1rem", "1.3rem", "1.5rem"]}>
             {lastEp.title} - {lastEp.interviewed}
           </Text>
-          <Text noOfLines={3}>{lastEp.description}</Text>
+          <Text noOfLines={6}>{lastEp.description}</Text>
           <Flex gap={[10, 20]}>
             <Flex>
               <Link target="_blank" to={lastEp.youtube}>

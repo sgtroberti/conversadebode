@@ -28,7 +28,7 @@ const EpisodeCard = ({ episode }) => {
       <Box p="6">
         <Box display="flex" alignItems="baseline">
           <Badge borderRadius="full" px="2" colorScheme="teal">
-            {episode.tipe}
+            {episode.type}
           </Badge>
           <Box
             color="gray.500"

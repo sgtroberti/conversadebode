@@ -10,6 +10,7 @@ const Footer = () => {
       alignItems={"center"}
       left={0}
       w={"100%"}
+      flexDir={["column", "row"]}
     >
       <Text fontWeight={600}>© GSR SoftHouse | 2023</Text>
       <Text fontWeight={300}>devroberti@gmail.com</Text>

@@ -9,6 +9,10 @@ import { TransitionGroup } from "react-transition-group";
 import Footer from "../Footer";
 import Recomendation from "../../routes/Recomendation";
 import { Flex } from "@chakra-ui/react";
+import Login from "../../routes/Login";
+import Admin from "../../routes/Admin";
+import { RequireAuth } from "../../context/AuthContext";
+import CrudSuggestion from "../../routes/CrudSuggestion";
 
 const Layout = () => {
   const location = useLocation();
@@ -59,6 +63,43 @@ const Layout = () => {
                   previousLocation={previousLocation}
                 >
                   <Recomendation />
+                </FadeTransition>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <FadeTransition
+                  location={location}
+                  previousLocation={previousLocation}
+                >
+                  <Login />
+                </FadeTransition>
+              }
+            />
+            <Route
+              path="/admin"
+              element={
+                <FadeTransition
+                  location={location}
+                  previousLocation={previousLocation}
+                >
+                  <RequireAuth>
+                    <Admin />
+                  </RequireAuth>
+                </FadeTransition>
+              }
+            />
+            <Route
+              path="/sugestoes"
+              element={
+                <FadeTransition
+                  location={location}
+                  previousLocation={previousLocation}
+                >
+                  <RequireAuth>
+                    <CrudSuggestion />
+                  </RequireAuth>
                 </FadeTransition>
               }
             />
