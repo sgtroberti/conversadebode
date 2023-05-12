@@ -24,7 +24,7 @@ const LastEpisode = ({ lastEp }) => {
         gap={5}
       >
         <Image
-          src={lastEp.image || "./assets/yt.png"}
+          src={lastEp?.image || "./assets/yt.png"}
           w={["100%", "100%", "100%", "45%", "55%"]}
           borderRadius={8}
         />
