@@ -19,3 +19,19 @@ root.render(
     </ChakraProvider>
   </React.StrictMode>
 );
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("/service-worker.js").then(
+      function (registration) {
+        console.log(
+          "ServiceWorker registrado com sucesso:",
+          registration.scope
+        );
+      },
+      function (error) {
+        console.log("Falha no registro do ServiceWorker:", error);
+      }
+    );
+  });
+}
