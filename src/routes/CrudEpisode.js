@@ -201,6 +201,18 @@ const CrudEpisode = () => {
           Cadastrar
         </Button>
 
+        {isLoading && (
+          <Flex w="100%" justifyContent={"center"}>
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="blue.500"
+              size="xl"
+            />
+          </Flex>
+        )}
+
         <Table
           border={"1px solid #ccc"}
           bgColor={"rgba(255, 255, 255, 1)"}
@@ -216,17 +228,9 @@ const CrudEpisode = () => {
             </Tr>
           </Thead>
 
-          {isLoading ? (
-            <Spinner
-              thickness="4px"
-              speed="0.65s"
-              emptyColor="gray.200"
-              color="blue.500"
-              size="xl"
-            />
-          ) : (
-            episodes.map((ep) => <CrudEpisodeCard key={ep._id} episode={ep} />)
-          )}
+          {!isLoading &&
+            episodes[0] &&
+            episodes.map((ep) => <CrudEpisodeCard key={ep._id} episode={ep} />)}
         </Table>
       </Flex>
     </>
