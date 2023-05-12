@@ -1,4 +1,12 @@
-import { Flex, Icon, Image, Text } from "@chakra-ui/react";
+import {
+  Flex,
+  Icon,
+  Image,
+  Text,
+  Link as ChakraLink,
+  Badge,
+} from "@chakra-ui/react";
+import { addHours, format } from "date-fns";
 import { BsSpotify, BsYoutube } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
@@ -39,6 +47,22 @@ const LastEpisode = ({ lastEp }) => {
           <Text fontWeight={700} fontSize={["1.1rem", "1.3rem", "1.5rem"]}>
             {lastEp.title} - {lastEp.interviewed}
           </Text>
+          <Flex w="100%" justifyContent={"space-evenly"} alignItems={"center"}>
+            <Badge
+              fontSize={"1rem"}
+              variant="subtle"
+              colorScheme="green"
+              borderRadius={8}
+              px={5}
+            >
+              {lastEp.type}
+            </Badge>
+            <Text fontWeight={300}>
+              Apresentada dia:{" "}
+              {format(addHours(new Date(lastEp.date), 3), "dd/MM/yyyy")}
+            </Text>
+          </Flex>
+
           <Text noOfLines={6}>{lastEp.description}</Text>
           <Flex gap={[10, 20]}>
             <Flex>

@@ -13,6 +13,8 @@ import Login from "../../routes/Login";
 import Admin from "../../routes/Admin";
 import { RequireAuth } from "../../context/AuthContext";
 import CrudSuggestion from "../../routes/CrudSuggestion";
+import CrudEpisode from "../../routes/CrudEpisode";
+import CrudRecomendation from "../../routes/CrudRecomendation";
 
 const Layout = () => {
   const location = useLocation();
@@ -99,6 +101,32 @@ const Layout = () => {
                 >
                   <RequireAuth>
                     <CrudSuggestion />
+                  </RequireAuth>
+                </FadeTransition>
+              }
+            />
+            <Route
+              path="/episodes"
+              element={
+                <FadeTransition
+                  location={location}
+                  previousLocation={previousLocation}
+                >
+                  <RequireAuth>
+                    <CrudEpisode />
+                  </RequireAuth>
+                </FadeTransition>
+              }
+            />
+            <Route
+              path="/recomendations"
+              element={
+                <FadeTransition
+                  location={location}
+                  previousLocation={previousLocation}
+                >
+                  <RequireAuth>
+                    <CrudRecomendation />
                   </RequireAuth>
                 </FadeTransition>
               }

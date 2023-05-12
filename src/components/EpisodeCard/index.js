@@ -1,4 +1,5 @@
 import { Badge, Box, Icon, Image } from "@chakra-ui/react";
+import { addHours, format } from "date-fns";
 import { BsSpotify, BsYoutube } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
@@ -27,7 +28,12 @@ const EpisodeCard = ({ episode }) => {
       </Link>
       <Box p="6">
         <Box display="flex" alignItems="baseline">
-          <Badge borderRadius="full" px="2" colorScheme="teal">
+          <Badge
+            borderRadius="full"
+            px="2"
+            variant="subtle"
+            colorScheme="green"
+          >
             {episode.type}
           </Badge>
           <Box
@@ -38,7 +44,7 @@ const EpisodeCard = ({ episode }) => {
             textTransform="uppercase"
             ml="2"
           >
-            {episode.date}
+            {format(addHours(new Date(episode.date), 3), "dd/MM/yyyy")}
           </Box>
         </Box>
       </Box>
