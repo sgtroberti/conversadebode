@@ -32,6 +32,7 @@ const CrudEpisode = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [episodes, setEpisodes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
   const {
     register,
     reset,
@@ -41,15 +42,60 @@ const CrudEpisode = () => {
 
   const navigate = useNavigate();
 
+  const handleProfile = (e) => {
+    const file = e.target.files[0];
+    console.log(e);
+    const reader = new FileReader();
+    reader.addEventListener(
+      "load",
+      () => {
+        alert(reader.result);
+      },
+      false
+    );
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleFormSubmit = async (data) => {
     try {
-      setIsSubmitting(true);
-      reset();
-      await client.post("/episodes", { ...data });
-      setIsSubmitting(false);
-      onClose();
-      navigate("/episodes", { replace: true });
-    } catch (error) {}
+      const { image: oldImage, ...rest } = data;
+      let image;
+      const reader = new FileReader();
+      reader.addEventListener(
+        "load",
+        async () => {
+          image = reader.result;
+          const newEpisode = { image, ...rest };
+          setIsSubmitting(true);
+          reset();
+          await client.post("/episodes", { ...newEpisode });
+          setIsSubmitting(false);
+          onClose();
+          navigate("/episodes", { replace: true });
+        },
+        false
+      );
+      if (oldImage[0]) {
+        reader.readAsDataURL(oldImage[0]);
+      }
+
+      // const newEpisode = {
+      //   image: image2,
+      // };
+
+      // console.log(newEpisode);
+
+      // setIsSubmitting(true);
+      // reset();
+      // await client.post("/episodes", { ...data });
+      // setIsSubmitting(false);
+      // onClose();
+      // navigate("/episodes", { replace: true });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -111,7 +157,9 @@ const CrudEpisode = () => {
                 <FormControl isInvalid={errors.image}>
                   <FormLabel>Imagem</FormLabel>
                   <Input
-                    type="text"
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleProfile(e)}
                     {...register("image", { required: "Image is required" })}
                   />
                   <FormErrorMessage>

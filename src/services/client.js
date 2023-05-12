@@ -5,6 +5,7 @@ const baseURL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
 const client = axios.create({
   baseURL,
+  maxContentLength: 4194304,
 });
 
 client.interceptors.request.use((config) => {
