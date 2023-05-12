@@ -7,6 +7,7 @@ import client from "../services/client";
 
 function Home() {
   const [episodes, setEpisodes] = useState();
+  const [lastEp, setLastEp] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -17,7 +18,9 @@ function Home() {
         const sortedDates = response.data.sort(
           (a, b) => new Date(a.date) - new Date(b.date)
         );
-        setEpisodes(sortedDates);
+        setLastEp(sortedDates.at(-1));
+        const episodesToList = [...sortedDates.slice(0, -1)];
+        setEpisodes(episodesToList);
         setIsLoading(false);
       }
     };
@@ -51,7 +54,7 @@ function Home() {
         ) : (
           episodes && (
             <>
-              <LastEpisode lastEp={episodes.at(-1)} />
+              <LastEpisode lastEp={lastEp} />
               <EpisodeList episodes={episodes} />
             </>
           )
