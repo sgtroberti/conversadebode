@@ -38,7 +38,7 @@ const LastEpisode = ({ lastEp }) => {
           borderRadius={8}
         >
           <Text fontWeight={700} fontSize={["1.1rem", "1.3rem", "1.5rem"]}>
-            {lastEp.title} - {lastEp.interviewed}
+            {lastEp?.title} - {lastEp?.interviewed}
           </Text>
           <Flex w="100%" justifyContent={"space-evenly"} alignItems={"center"}>
             <Badge
@@ -48,18 +48,18 @@ const LastEpisode = ({ lastEp }) => {
               borderRadius={8}
               px={5}
             >
-              {lastEp.type}
+              {lastEp?.type}
             </Badge>
             <Text fontWeight={300}>
               Apresentada dia:{" "}
-              {format(addHours(new Date(lastEp.date), 3), "dd/MM/yyyy")}
+              {format(addHours(new Date(lastEp?.date), 3), "dd/MM/yyyy")}
             </Text>
           </Flex>
 
-          <Text noOfLines={6}>{lastEp.description}</Text>
+          <Text noOfLines={6}>{lastEp?.description}</Text>
           <Flex gap={[10, 20]}>
             <Flex>
-              <Link target="_blank" to={lastEp.youtube}>
+              <Link target="_blank" to={lastEp?.youtube}>
                 <Flex alignItems={"center"} flexDir={"column"} gap={2}>
                   <Icon w={20} h={20} color="#c4302b" as={BsYoutube} />
                   <Text textAlign={"center"} fontWeight={500}>
@@ -69,7 +69,7 @@ const LastEpisode = ({ lastEp }) => {
               </Link>
             </Flex>
             <Flex>
-              <Link target="_blank" to={lastEp.spotify}>
+              <Link target="_blank" to={lastEp?.spotify}>
                 <Flex alignItems={"center"} flexDir={"column"} gap={2}>
                   <Icon w={20} h={20} color="#1db954" as={BsSpotify} />
                   <Text textAlign={"center"} fontWeight={500}>
