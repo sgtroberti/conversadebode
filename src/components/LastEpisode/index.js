@@ -52,7 +52,8 @@ const LastEpisode = ({ lastEp }) => {
             </Badge>
             <Text fontWeight={300}>
               Apresentada dia:{" "}
-              {format(addHours(new Date(lastEp?.date), 3), "dd/MM/yyyy")}
+              {lastEp &&
+                format(addHours(new Date(lastEp?.date), 3), "dd/MM/yyyy")}
             </Text>
           </Flex>
 
