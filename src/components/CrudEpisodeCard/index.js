@@ -1,5 +1,5 @@
 import { DeleteIcon } from "@chakra-ui/icons";
-import { Button, Tbody, Td, Text, Tr } from "@chakra-ui/react";
+import { Button, Tbody, Td, Tr } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import client from "../../services/client";
 import format from "date-fns/format";

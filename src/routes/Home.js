@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Spinner } from "@chakra-ui/react";
 import HomeCard from "../components/HomeCard";
 import LastEpisode from "../components/LastEpisode";
 import EpisodeList from "../components/EpisodeList";
@@ -7,16 +7,21 @@ import client from "../services/client";
 
 function Home() {
   const [episodes, setEpisodes] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const request = async () => {
       const response = await client.get("/episodes");
       if (response.data) {
-        setEpisodes(response.data);
+        const sortedDates = response.data.sort(
+          (a, b) => new Date(a.date) - new Date(b.date)
+        );
+        setEpisodes(sortedDates);
+        setIsLoading(false);
       }
     };
     request();
-    console.log(episodes);
   }, []);
 
   return (
@@ -34,11 +39,22 @@ function Home() {
         alignItems={"center"}
       >
         <HomeCard />
-        {episodes && (
-          <>
-            <LastEpisode lastEp={episodes.at(-1)} />
-            <EpisodeList episodes={episodes} />
-          </>
+
+        {isLoading ? (
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="blue.500"
+            size="xl"
+          />
+        ) : (
+          episodes && (
+            <>
+              <LastEpisode lastEp={episodes.at(-1)} />
+              <EpisodeList episodes={episodes} />
+            </>
+          )
         )}
       </Flex>
     </>

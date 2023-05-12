@@ -2,6 +2,8 @@ import { Flex, Text } from "@chakra-ui/react";
 import EpisodeCard from "../EpisodeCard";
 
 const EpisodeList = ({ episodes }) => {
+  const reversed = [...episodes].reverse();
+
   return (
     <Flex
       flexDir={"column"}
@@ -20,7 +22,7 @@ const EpisodeList = ({ episodes }) => {
         Lista de Episódios
       </Text>
       <Flex p={5} justifyContent={"space-between"} gap={5} wrap={"wrap"}>
-        {episodes.map((episode) => (
+        {reversed.map((episode) => (
           <EpisodeCard key={episode.id} episode={episode} />
         ))}
       </Flex>

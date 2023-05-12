@@ -12,13 +12,13 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Spinner,
   Table,
   Text,
   Th,
   Thead,
   Tr,
   useDisclosure,
-  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -29,9 +29,9 @@ import CrudEpisodeCard from "../components/CrudEpisodeCard";
 
 const CrudEpisode = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const toast = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [episodes, setEpisodes] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     reset,
@@ -53,10 +53,15 @@ const CrudEpisode = () => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     const request = async () => {
       const response = await client.get("/episodes");
       if (response.data) {
-        setEpisodes(response.data);
+        const sortedDates = response.data.sort(
+          (a, b) => new Date(a.date) - new Date(b.date)
+        );
+        setEpisodes(sortedDates);
+        setIsLoading(false);
       }
     };
     request();
@@ -211,9 +216,17 @@ const CrudEpisode = () => {
             </Tr>
           </Thead>
 
-          {episodes.map((ep) => (
-            <CrudEpisodeCard key={ep._id} episode={ep} />
-          ))}
+          {isLoading ? (
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="blue.500"
+              size="xl"
+            />
+          ) : (
+            episodes.map((ep) => <CrudEpisodeCard key={ep._id} episode={ep} />)
+          )}
         </Table>
       </Flex>
     </>
