@@ -42,22 +42,6 @@ const CrudEpisode = () => {
 
   const navigate = useNavigate();
 
-  const handleProfile = (e) => {
-    const file = e.target.files[0];
-    console.log(e);
-    const reader = new FileReader();
-    reader.addEventListener(
-      "load",
-      () => {
-        alert(reader.result);
-      },
-      false
-    );
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  };
-
   const handleFormSubmit = async (data) => {
     try {
       const { image: oldImage, ...rest } = data;
@@ -80,19 +64,6 @@ const CrudEpisode = () => {
       if (oldImage[0]) {
         reader.readAsDataURL(oldImage[0]);
       }
-
-      // const newEpisode = {
-      //   image: image2,
-      // };
-
-      // console.log(newEpisode);
-
-      // setIsSubmitting(true);
-      // reset();
-      // await client.post("/episodes", { ...data });
-      // setIsSubmitting(false);
-      // onClose();
-      // navigate("/episodes", { replace: true });
     } catch (error) {
       console.log(error);
     }
@@ -159,7 +130,6 @@ const CrudEpisode = () => {
                   <Input
                     type="file"
                     accept="image/*"
-                    onChange={(e) => handleProfile(e)}
                     {...register("image", { required: "Image is required" })}
                   />
                   <FormErrorMessage>
