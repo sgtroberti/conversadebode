@@ -10,9 +10,11 @@ import {
 import { useForm } from "react-hook-form";
 import { useToast } from "@chakra-ui/react";
 import client from "../services/client";
+import { useNavigate } from "react-router-dom";
 
 const Suggestion = () => {
   const toast = useToast();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -34,6 +36,7 @@ const Suggestion = () => {
           duration: 9000,
           isClosable: true,
         });
+        navigate("/", { replace: true });
       }
     } catch (error) {
       toast({
