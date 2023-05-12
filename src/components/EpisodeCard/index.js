@@ -12,7 +12,7 @@ const EpisodeCard = ({ episode }) => {
       borderRadius="lg"
       overflow="hidden"
       p={5}
-      maxW={["100%", "100%", "45%", "45%", "45%", "29%"]}
+      w={["100%", "100%", "45%", "45%", "45%", "29%"]}
       display={"flex"}
       flexDir={"column"}
       alignItems={"center"}
