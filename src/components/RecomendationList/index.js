@@ -1,5 +1,4 @@
 import { Flex, Text } from "@chakra-ui/react";
-import recomendations from "../../mock/recomendations";
 import RecomendationCard from "../RecomendationCard";
 
 const RecomendationList = () => {
@@ -28,14 +27,14 @@ const RecomendationList = () => {
         de material aqui, por favor, entre em contato!
       </Text>
 
-      <Flex p={5} justifyContent={"space-between"} gap={3} wrap={"wrap"}>
+      {/* <Flex p={5} justifyContent={"space-between"} gap={3} wrap={"wrap"}>
         {recomendations.map((recomendation) => (
           <RecomendationCard
             key={recomendation.id}
             recomendation={recomendation}
           />
         ))}
-      </Flex>
+      </Flex> */}
     </Flex>
   );
 };

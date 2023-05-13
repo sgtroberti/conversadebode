@@ -6,21 +6,15 @@ import { useEffect, useState } from "react";
 import client from "../services/client";
 
 function Home() {
-  const [episodes, setEpisodes] = useState();
   const [lastEp, setLastEp] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
     const request = async () => {
-      const response = await client.get("/episodes");
+      const response = await client.get("/episodes/last");
       if (response.data) {
-        const sortedDates = response.data.sort(
-          (a, b) => new Date(a.date) - new Date(b.date)
-        );
-        setLastEp(sortedDates.at(-1));
-        const episodesToList = [...sortedDates.slice(0, -1)];
-        setEpisodes(episodesToList);
+        setLastEp(response.data);
         setIsLoading(false);
       }
     };
@@ -52,10 +46,10 @@ function Home() {
             size="xl"
           />
         ) : (
-          episodes && (
+          lastEp && (
             <>
               <LastEpisode lastEp={lastEp} />
-              <EpisodeList episodes={episodes} />
+              <EpisodeList />
             </>
           )
         )}

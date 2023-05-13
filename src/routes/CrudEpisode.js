@@ -72,7 +72,7 @@ const CrudEpisode = () => {
   useEffect(() => {
     setIsLoading(true);
     const request = async () => {
-      const response = await client.get("/episodes");
+      const response = await client.get("/episodes/all");
       if (response.data) {
         const sortedDates = response.data.sort(
           (a, b) => new Date(a.date) - new Date(b.date)
