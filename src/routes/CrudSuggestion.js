@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import client from "../services/client";
-import { Flex, Table, Text, Th, Thead, Tr } from "@chakra-ui/react";
+import { Flex, Spinner, Table, Text, Th, Thead, Tr } from "@chakra-ui/react";
 import SuggestionCard from "../components/SuggestionCard";
 
 const CrudSuggestion = () => {
   const [suggestions, setSuggestions] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const request = async () => {
       const response = await client.get("/suggestions");
       if (response.data) {
         setSuggestions(response.data);
       }
+      setIsLoading(false);
     };
     request();
   }, []);
@@ -31,6 +34,18 @@ const CrudSuggestion = () => {
       <Text fontWeight={700} fontSize={["1rem", "1.5rem", "2rem"]}>
         Sugestões enviadas pelo site
       </Text>
+
+      {isLoading && (
+        <Flex w="100%" justifyContent={"center"}>
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="blue.500"
+            size="xl"
+          />
+        </Flex>
+      )}
 
       <Table
         border={"1px solid #ccc"}
