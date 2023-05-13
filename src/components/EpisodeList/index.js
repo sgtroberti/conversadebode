@@ -10,6 +10,7 @@ const EpisodeList = () => {
   const [totalPages, setTotalPages] = useState();
   const [episodes, setEpisodes] = useState([]);
   const [reload, setReload] = useState(false);
+  const [canScroll, setCanScroll] = useState(false);
 
   useEffect(() => {
     const request = async () => {
@@ -29,24 +30,25 @@ const EpisodeList = () => {
           const [primeiro, ...rest] = response.data.response;
           setEpisodes(rest);
         }
+        setCanScroll(true);
       }
     };
     request();
   }, []);
 
   const fetchMore = async () => {
-    if (page >= totalPages) {
-      setHasMore(false);
-    }
+    if (canScroll) {
+      if (page >= totalPages) {
+        setHasMore(false);
+      }
 
-    setTimeout(async () => {
       const response = await client.get(`/episodes?page=${page + 1}`);
       if (response.data) {
         setPage(page + 1);
         setEpisodes([...episodes, ...response.data.response]);
         setReload(!reload);
       }
-    }, 2000);
+    }
   };
 
   return (
