@@ -12,34 +12,36 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Spinner,
-  Table,
-  Text,
-  Th,
-  Thead,
+  Tbody,
+  Td,
   Tr,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import client from "../services/client";
-import CrudRecomendationCard from "../components/CrudRecomendationCard";
+import client from "../../services/client";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 
-const CrudRecomendation = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+const CrudRecomendationCard = ({ recomendation }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [recomendations, setRecomendations] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
+  const navigate = useNavigate();
   const {
     register,
     reset,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const navigate = useNavigate();
+  const handleDelete = async () => {
+    try {
+      const response = await client.delete(
+        `/recomendations/${recomendation._id}`
+      );
+      response && navigate("/recomendations", { replace: true });
+    } catch (error) {}
+  };
 
   const handleFormSubmit = async (data) => {
     try {
@@ -50,10 +52,12 @@ const CrudRecomendation = () => {
         "load",
         async () => {
           image = reader.result;
-          const newEpisode = { image, ...rest };
+          const newRecomendation = { image, ...rest };
           setIsSubmitting(true);
           reset();
-          await client.post("/recomendations", { ...newEpisode });
+          await client.patch(`/recomendations/${recomendation._id}`, {
+            ...newRecomendation,
+          });
           setIsSubmitting(false);
           onClose();
           navigate("/recomendations", { replace: true });
@@ -68,24 +72,12 @@ const CrudRecomendation = () => {
     }
   };
 
-  useEffect(() => {
-    setIsLoading(true);
-    const request = async () => {
-      const response = await client.get("/recomendations/all");
-      if (response.data) {
-        setRecomendations(response.data);
-        setIsLoading(false);
-      }
-    };
-    request();
-  }, []);
   return (
     <>
-      {/* Modal cadastro */}
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Adicionar Recomendação</ModalHeader>
+          <ModalHeader>Editar Recomendação</ModalHeader>
           <ModalCloseButton />
           <form onSubmit={handleSubmit(handleFormSubmit)}>
             <ModalBody>
@@ -93,6 +85,7 @@ const CrudRecomendation = () => {
                 <FormControl isInvalid={errors.type}>
                   <FormLabel>Tipo</FormLabel>
                   <Input
+                    defaultValue={recomendation.type}
                     type="text"
                     {...register("type", { required: "Type is required" })}
                   />
@@ -103,6 +96,7 @@ const CrudRecomendation = () => {
                 <FormControl isInvalid={errors.name}>
                   <FormLabel>Nome</FormLabel>
                   <Input
+                    defaultValue={recomendation.name}
                     type="text"
                     {...register("name", { required: "Name is required" })}
                   />
@@ -113,6 +107,7 @@ const CrudRecomendation = () => {
                 <FormControl isInvalid={errors.creator}>
                   <FormLabel>Autor</FormLabel>
                   <Input
+                    defaultValue={recomendation.creator}
                     type="text"
                     {...register("creator", {
                       required: "Creator is required",
@@ -136,6 +131,7 @@ const CrudRecomendation = () => {
                 <FormControl isInvalid={errors.where}>
                   <FormLabel>Onde encontrar?</FormLabel>
                   <Input
+                    defaultValue={recomendation.where}
                     type="text"
                     {...register("where", {
                       required: "Where is required",
@@ -159,62 +155,34 @@ const CrudRecomendation = () => {
           </form>
         </ModalContent>
       </Modal>
-      {/* Restante página */}
-
-      <Flex
-        p={5}
-        mx={"auto"}
-        borderRadius={8}
-        bgColor={"rgba(255, 255, 255, 0.7)"}
-        flexDir={"column"}
-        w={["96%", "90%", "85%", "70%"]}
-        gap={[3]}
-        justifyContent={"center"}
+      <Tbody
+        bgColor={"rgba(255, 255, 255, 0.8)"}
+        justifyContent={"space-between"}
         alignItems={"center"}
+        flexDir={"column"}
+        p={2}
+        borderRadius={8}
+        gap={2}
       >
-        <Text fontWeight={700} fontSize={["1rem", "1.5rem", "2rem"]}>
-          Recomendações
-        </Text>
-
-        <Button colorScheme="green" onClick={onOpen}>
-          Cadastrar
-        </Button>
-
-        {isLoading && (
-          <Flex w="100%" justifyContent={"center"}>
-            <Spinner
-              thickness="4px"
-              speed="0.65s"
-              emptyColor="gray.200"
-              color="blue.500"
-              size="xl"
-            />
-          </Flex>
-        )}
-
-        <Table
-          border={"1px solid #ccc"}
-          bgColor={"rgba(255, 255, 255, 1)"}
-          size="sm"
-        >
-          <Thead>
-            <Tr>
-              <Th>Tipo</Th>
-              <Th>Nome</Th>
-              <Th>Autor</Th>
-              <Th>Onde encontrar</Th>
-              <Th>Ações</Th>
-            </Tr>
-          </Thead>
-
-          {!isLoading &&
-            recomendations[0] &&
-            recomendations.map((rec) => (
-              <CrudRecomendationCard key={rec._id} recomendation={rec} />
-            ))}
-        </Table>
-      </Flex>
+        <Tr>
+          <Td>{recomendation.type}</Td>
+          <Td>{recomendation.name}</Td>
+          <Td>{recomendation.creator}</Td>
+          <Td>{recomendation.where}</Td>
+          <Td>
+            <Flex gap={3}>
+              <Button size={"xs"} onClick={handleDelete} colorScheme="red">
+                <DeleteIcon />
+              </Button>
+              <Button size={"xs"} onClick={onOpen} colorScheme="yellow">
+                <EditIcon />
+              </Button>
+            </Flex>
+          </Td>
+        </Tr>
+      </Tbody>
     </>
   );
 };
-export default CrudRecomendation;
+
+export default CrudRecomendationCard;
