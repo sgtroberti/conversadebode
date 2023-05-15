@@ -29,9 +29,7 @@ const RecomendationList = () => {
         } else {
           setRecomendations(response.data.response);
         }
-        if (hasMore > page) {
-          setCanScroll(true);
-        }
+        setCanScroll(true);
       }
     };
     request();
@@ -39,7 +37,6 @@ const RecomendationList = () => {
 
   const fetchMore = async () => {
     if (canScroll) {
-      console.log("chamou");
       if (page >= totalPages) {
         setHasMore(false);
       } else {
