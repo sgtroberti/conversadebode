@@ -1,4 +1,4 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Image, Text } from "@chakra-ui/react";
 
 const Footer = () => {
   return (
@@ -12,8 +12,12 @@ const Footer = () => {
       w={"100%"}
       flexDir={["column", "row"]}
     >
-      <Text fontWeight={600}>© GSR SoftHouse | 2023</Text>
-      <Text fontWeight={300}>devroberti@gmail.com</Text>
+      <Flex gap={2}>
+        <a href="mailto:devroberti@gmail.com">
+          <Image w={"100px"} borderRadius={8} src="./appiducks.png" />
+        </a>
+        <Text fontWeight={600}>© 2023</Text>
+      </Flex>
     </Flex>
   );
 };
